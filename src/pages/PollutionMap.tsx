@@ -24,7 +24,7 @@ import "./PollutionMap.css";
 type Filter = "All" | Category;
 
 const categories: Filter[] = ["All", "Ocean", "Land", "River", "Coastal"];
-const textureBase = "/textures/";
+const textureBase = `${import.meta.env.BASE_URL}textures/`;
 
 const texture = (name: string) =>
   (window as Window & { MICROGUARD_TEXTURES?: Record<string, string> }).MICROGUARD_TEXTURES?.[name] ??
@@ -159,7 +159,7 @@ export default function PollutionMap() {
           <span className="mg-online">
             <span /> SIMULATED DEMO
           </span>
-          <a href="/" className="mg-back">
+          <a href={`${import.meta.env.BASE_URL}`} className="mg-back">
             <ArrowLeft size={15} /> Home
           </a>
         </div>
@@ -268,15 +268,27 @@ export default function PollutionMap() {
           )}
 
           <div className="mg-top-right">
-            <button onClick={toggleFullscreen}>{full ? <Minimize size={18} /> : <Expand size={18} />}</button>
-            <button onClick={reset}><RotateCcw size={18} /></button>
-            <button onClick={() => setRotate((v) => !v)}>{rotate ? <Pause size={18} /> : <Play size={18} />}</button>
-            <button onClick={() => setSidebar((v) => !v)}><Compass size={18} /></button>
+            <button onClick={toggleFullscreen}>
+              {full ? <Minimize size={18} /> : <Expand size={18} />}
+            </button>
+            <button onClick={reset}>
+              <RotateCcw size={18} />
+            </button>
+            <button onClick={() => setRotate((v) => !v)}>
+              {rotate ? <Pause size={18} /> : <Play size={18} />}
+            </button>
+            <button onClick={() => setSidebar((v) => !v)}>
+              <Compass size={18} />
+            </button>
           </div>
 
           <div className="mg-zoom">
-            <button onClick={() => zoom(-1)}><Plus size={18} /></button>
-            <button onClick={() => zoom(1)}><Minus size={18} /></button>
+            <button onClick={() => zoom(-1)}>
+              <Plus size={18} />
+            </button>
+            <button onClick={() => zoom(1)}>
+              <Minus size={18} />
+            </button>
           </div>
         </div>
 
